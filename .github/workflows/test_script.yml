@@ -1,0 +1,46 @@
+name: Test Python Script on Push
+on: [push]
+jobs:
+  test_10_numbers:
+    name: Test 10 Numbers for Lowest Value
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.1
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Produce test1_expected.txt output
+        run: python find_lowest_number.py > test1_actual.txt
+      - name: Compare expected output to actual
+        run: diff test1_expected.txt test1_actual.txt
+  test_1_number:
+    name: Test 1 Number for Lowest Value
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.1
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Produce test2_expected.txt output
+        run: python find_lowest_number.py > test2_actual.txt
+      - name: Compare expected output to actual
+        run: diff test2_expected.txt test2_actual.txt
+  test_no_numbers:
+    name: Test Blank File for Lowest Value
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.1
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Produce test3_expected.txt output
+        run: python find_lowest_number.py > test3_actual.txt
+      - name: Compare expected output to actual
+        run: diff test3_expected.txt test3_actual.txt
+    name:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 
