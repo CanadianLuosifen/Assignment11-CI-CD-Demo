@@ -40,6 +40,3 @@ jobs:
         run: python3 find_lowest_number.py test3_input.txt test3_actual.txt
       - name: Compare expected output to actual
         run: diff test3_expected.txt test3_actual.txt
-    runs-on: ubuntu-latest
-    steps:
-      - uses: 
