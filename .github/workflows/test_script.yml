@@ -1,33 +1,42 @@
-name: Automated Python Script Execution on Push
+name: Automate Python Script Testing on Push
 on: [push]
-
 jobs:
-  test_all:
-    name: Check Lowest Number Python Script Outputs Match Expected
+  test_10_numbers:
+    name: Test 10 Numbers for Lowest Value
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v5
+      - name: Set up Python 3.1
+        uses: actions/setup-python@v3
         with:
           python-version: "3.10"
-      
-      - name: Test 10 Numbers
-        continue-on-error: true
-        run: |
-          python3 find_lowest_number.py test_data/test1_input.txt test_data/test1_actual.txt
-          diff test_data/test1_expected.txt test_data/test1_actual.txt
-      
-      - name: Test 1 Number
-        continue-on-error: true
-        run: |
-          python3 find_lowest_number.py test_data/test2_input.txt test_data/test2_actual.txt
-          diff test_data/test2_expected.txt test_data/test2_actual.txt
-      
-      - name: Test Blank File
-        continue-on-error: true
-        run: |
-          python3 find_lowest_number.py test_data/test3_input.txt test_data/test3_actual.txt
-          diff test_data/test3_expected.txt test_data/test3_actual.txt
+      - name: Produce test1_expected.txt output
+        run: python3 find_lowest_number.py test_data/test1_input.txt test_data/test1_actual.txt
+      - name: Compare expected output to actual
+        run: diff test_data/test1_expected.txt test_data/test1_actual.txt
+  test_1_number:
+    name: Test 1 Number for Lowest Value
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.1
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Produce test2_expected.txt output
+        run: python3 find_lowest_number.py test_data/test2_input.txt test_data/test2_actual.txt
+      - name: Compare expected output to actual
+        run: diff test_data/test2_expected.txt test_data/test2_actual.txt
+  test_no_numbers:
+    name: Test Blank File for Lowest Value
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.1
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Produce test3_expected.txt output
+        run: python3 find_lowest_number.py test_data/test3_input.txt test_data/test3_actual.txt
+      - name: Compare expected output to actual
+        run: diff test_data/test3_expected.txt test_data/test3_actual.txt
